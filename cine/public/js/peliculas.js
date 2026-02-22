@@ -15,6 +15,10 @@ let material = document.getElementById("material");
 
 let btnGuardarPelicula = document.getElementById("btnGuardarPelicula");
 
+function formatearDosDigitos(numero) {
+    return String(numero).padStart(2, "0"); /* Convierte el número a texto y debe tener 2 caracteres, si el elemento tiene menos de uno, agrega un cero al numero antes de volverlo un string , como 5 pasa a 05 y listo. Para el futuro, se puede recuperar, si usa no string sino number, solo aplicar otro split*/
+}
+
 function calcularHoraFin(horaInicio, duracion) {
     const [horaI, minutoI] = horaInicio.split(":").map(Number);
     const [horaD, minutoD] = duracion.split(":").map(Number);
@@ -24,12 +28,10 @@ function calcularHoraFin(horaInicio, duracion) {
 
     const totalMinutos = inicioEnMinutos + duracionEnMinutos;
 
-    const horaFin = Math.floor(totalMinutos / 60) % 24;
-    const minutoFin = totalMinutos % 60;
+    const horaFin = Math.floor(totalMinutos / 60) % 24;  /* se redondea con floor para obtener el entero hacia abajo */ /* 24 es para reiniciar el valor, una ve pase las 24 horas */
+    const minutoFin = totalMinutos % 60; /* lo que sobra al dividir entre 60, el residuo*/
 
-    return `${horaFin.toString().padStart(2, "0")}:${minutoFin
-        .toString()
-        .padStart(2, "0")}`;
+     return formatearDosDigitos(horaFin) + ":" + formatearDosDigitos(minutoFin);
 }
 
 btnGuardarPelicula.addEventListener("click", async function () {
