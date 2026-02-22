@@ -7,6 +7,7 @@ let capacidadSala = document.getElementById("capacidadSala");
 let tipoSala = document.getElementById("tipoSala");
 let estadoSala = document.getElementById("estadoSala");
 let equipamiento = document.getElementById("equipamiento");
+let fechaFuncion= document.getElementById("fechaFuncion")
 
 const contenedorPeliculas = document.getElementById("contenedorPeliculas");
 
@@ -16,7 +17,7 @@ async function cargarPeliculasEnSelect() {
     try {
 
         let peliculas = await getPeliculas(); /* obtener películas */
-        contenedorPeliculas.textContent = "";
+        contenedorPeliculas.textContent = ""; /* destruye el select anterior y se reconstruye al instante */
 
         let selectPeliculas = document.createElement("select");
         selectPeliculas.id = "peliculaSeleccionada"; /* el id de este select */
@@ -29,11 +30,12 @@ async function cargarPeliculasEnSelect() {
 
 
         for (let i = 0; i < peliculas.length; i++) {  /* recorrer películas del DB.json */
+           if (peliculas[i].estado === "activa") {
             const option = document.createElement("option");
             option.value = peliculas[i].id;           /* id película */
             option.textContent = peliculas[i].titulo;  /* nombre */
             selectPeliculas.appendChild(option);
-        }
+        }}
 
 
         contenedorPeliculas.appendChild(selectPeliculas); /* agregar select al contenedor */
@@ -48,8 +50,7 @@ cargarPeliculasEnSelect();
 btnGuardarSala.addEventListener("click", async function () {
     try {
         const selectPeliculas = document.getElementById("peliculaSeleccionada");
-        if (nombreSala.value.trim() === "" || capacidadSala.value.trim() === "" || tipoSala.value.trim() === "" || estadoSala.value.trim() === "" || equipamiento.value.trim() === ""
-        ) {
+        if (nombreSala.value.trim() === "" || capacidadSala.value.trim() === "" || tipoSala.value.trim() === "" || estadoSala.value.trim() === "" || equipamiento.value.trim() === ""||fechaFuncion.value.trim() === "") {
             Swal.fire({
                 title: "Error",
                 text: "Todos los campos son obligatorios",
@@ -59,17 +60,18 @@ btnGuardarSala.addEventListener("click", async function () {
         } else {
             const peliculas = await getPeliculas();
 
-        const peliculaSeleccionada = peliculas.find(
-            pelicula => pelicula.id == selectPeliculas.value
-        );
+        const peliculaSeleccionada = peliculas.find(pelicula => pelicula.id == selectPeliculas.value&&pelicula.estado === "activa");
         if (!peliculaSeleccionada) {
             Swal.fire({
                 title: "Error",
-                text: "Película no encontrada",
+                text: "Película no disponible",
                 icon: "error"
             });
             return;
         } else {
+            
+                
+            
             const sala = {
                 nombre: nombreSala.value.trim(),
                 capacidad: capacidadSala.value.trim(),
@@ -78,12 +80,15 @@ btnGuardarSala.addEventListener("click", async function () {
                 equipamiento: equipamiento.value.trim(),
                 peliculaId: peliculaSeleccionada.id,
                 peliculaTitulo: peliculaSeleccionada.titulo,
+                fechaFuncion: fechaFuncion.value.trim(),
                 horaInicioSala: peliculaSeleccionada.horaInicio,
                 horaFinSala: peliculaSeleccionada.horaFin
+                
             };
 
             await postSalas(sala);
-        
+            await updatePatchPeliculas (peliculaSeleccionada.id, {estado:"inactiva"})
+            await cargarPeliculasEnSelect();/* vuelve a ejecutar la funcion de arriba y con ello se actualiza el select a tiempo real */
 
             Swal.fire({
                 title: "Registro exitoso",
@@ -98,8 +103,9 @@ btnGuardarSala.addEventListener("click", async function () {
             tipoSala.value = "";
             estadoSala.value = "";
             equipamiento.value = "";
-        }
-        }
+            fechaFuncion.value= "";
+        
+        }}
   
     } catch (error) {
         console.error("Error al registrar la sala", error);
