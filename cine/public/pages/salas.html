@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Salas</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Gestión de Salas</h1>
+    </header>
+
+    <nav>
+        <a href="../pages/peliculas.html">Películas</a>
+        <a href="../pages/salas.html">Salas</a>
+    </nav>
+
+    <main>
+        <h2>Administración de Salas</h2>
+
+        <label>Número de sala</label><br>
+        <select id="nombreSala">
+            <option value="">Seleccione</option>
+            <option value="Sala 1">Sala 1</option>
+            <option value="Sala 2">Sala 2</option>
+            <option value="Sala 3">Sala 3</option>
+        </select><br><br>
+
+        <label>Capacidad</label><br>
+        <input type="number" id="capacidadSala" min="1"><br><br>
+
+        <label>Tipo de sala</label><br>
+        <select id="tipoSala">
+            <option value="">Seleccione</option>
+            <option value="2D">2D</option>
+            <option value="3D">3D</option>
+            <option value="IMAX">IMAX</option>
+            <option value="VIP">VIP</option>
+        </select><br><br>
+         <label for="equipamiento">Equipamiento</label>
+        <input type="text" id="equipamiento"><br><br>
+
+        <label>Estado operativo</label><br>
+        <select id="estadoSala">
+            <option value="operativa">Operativa</option>
+            <option value="mantenimiento">En mantenimiento</option>
+            <option value="inactiva">Inactiva</option>
+        </select><br><br>
+
+        <label for="contenedorPeliculas">Película a reproducir</label>
+        <div id="contenedorPeliculas"> <!-- CONTENEDOR PARA SELECT DINÁMICO: Prueba 1 -->
+            
+        </div><br><br>
+
+        <button id="btnGuardarSala">Guardar sala</button>
+    </main>
+
+    <script src="../js/salas.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

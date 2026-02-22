@@ -1,0 +1,32 @@
+{
+  "peliculas": [
+    {
+      "id": "8303",
+      "titulo": "mi amigo el migajero",
+      "sinopsis": "historia de un arrastrado en un parque",
+      "duracion": "02:05",
+      "clasificacion": "PG-13",
+      "genero": "comedia",
+      "fechaInicio": "2026-02-22",
+      "fechaFin": "2026-02-27",
+      "horaInicio": "18:05",
+      "horaFin": "20:10",
+      "estado": "activa",
+      "material": "http://localhost:3001/pages/peliculas.html"
+    }
+  ],
+  "salas": [
+    {
+      "id": "225a",
+      "nombre": "Sala 2",
+      "capacidad": "40",
+      "tipo": "3D",
+      "estado": "operativa",
+      "equipamiento": "proyector",
+      "peliculaId": "8303",
+      "peliculaTitulo": "mi amigo el migajero",
+      "horaInicioSala": "18:05",
+      "horaFinSala": "20:10"
+    }
+  ]
+}

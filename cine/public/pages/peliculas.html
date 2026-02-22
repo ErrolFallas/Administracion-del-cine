@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cartelera</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Gestión de Cartelera</h1>
+    </header>
+
+    <nav>
+        <a href="../pages/peliculas.html">Películas</a>
+        <a href="../pages/salas.html">Salas</a>
+    </nav>
+
+    <main>
+        <h2>Registro de Películas</h2>
+
+        <label>Título de la película</label><br>
+        <input type="text" id="tituloPelicula"><br><br>
+
+        <label>Sinopsis</label><br>
+        <input type="text" id="sinopsisPelicula"><br><br>
+
+        <label>Duración (HH:MM)</label><br>
+        <input type="time" id="duracionPelicula" min="00:01" max="05:00" step="60"><br><br>
+
+        <label>Clasificación</label><br>
+        <select id="clasificacionPelicula">
+            <option value="">Seleccione</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select><br><br>
+
+        <label>Género</label><br>
+        <select id="generoPelicula">
+            <option value="">Seleccione</option>
+            <option value="accion">Acción</option>
+            <option value="comedia">Comedia</option>
+            <option value="drama">Drama</option>
+            <option value="terror">Terror</option>
+            <option value="animacion">Animación</option>
+            <option value="ciencia_ficcion">Ciencia ficción</option>
+        </select><br><br>
+
+        <label for="fechaInicio">Fecha de inicio de exhibición</label><br>
+        <input type="date" id="fechaInicio"><br><br>
+
+        <label for="fechaFin">Fecha de fin de exhibición</label><br>
+        <input type="date" id="fechaFin"><br><br>
+
+        <label for="horaInicio">Hora de inicio de la función</label><br>
+        <input type="time" id="horaInicio"><br><br>
+
+        <label for="estado">Estado</label><br>
+        <select id="estado">
+            <option value="activa">Activa</option>
+            <option value="inactiva">Inactiva</option>
+        </select><br><br>
+
+        <label for="material">Material multimedia</label><br>
+        <iframe src="" id="material"></iframe><br><br>
+
+        <button id="btnGuardarPelicula">Guardar película</button>
+    </main>
+
+
+    <script src="../js/peliculas.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>
